@@ -1,7 +1,4 @@
-var MongoClient = require('mongodb').MongoClient;
-
 module.exports = {
-  _url: 'mongodb://localhost:27017/movies',
 
   create: function (movie, successCallback) {
 
