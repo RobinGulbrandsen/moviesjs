@@ -32,8 +32,9 @@ module.exports = {
   },
 
   readAll: function (req, res) {
-    MovieRepository.readAll().then(function(data) {
-      res.status(200).send(data);
+    MovieRepository.readAll().then(function(movies) {
+      console.log(movies);
+      res.status(200).send(movies);
     }).catch(function(error) {
       console.log(error);
       res.status(500).send('You broke it!');
