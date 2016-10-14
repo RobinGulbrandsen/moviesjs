@@ -15,9 +15,11 @@
 | PUT    | /movies/:id| Movie    | Movie          |
 | DELETE | /movies/:id| Movie id |                |
 
-### GET /movies
+### Example Requests
 
-#### Output
+#### GET /movies
+
+##### Output
 
 ```javascript
 [
@@ -31,9 +33,9 @@
 ]
 ```
 
-### GET /movies/58003f7aab2c8a2708bac205
+#### GET /movies/58003f7aab2c8a2708bac205
 
-#### Output
+##### Output
 
 ```javascript
 {
@@ -45,9 +47,9 @@
 }
 ```
 
-### POST /movies
+#### POST /movies
 
-#### Input
+##### Input
 
 ```javascript
 {
@@ -58,7 +60,7 @@
 }
 ```
 
-#### Output
+##### Output
 
 ```javascript
 {
@@ -70,9 +72,9 @@
 }
 ```
 
-### PUT /movies
+#### PUT /movies
 
-#### Input
+##### Input
 
 ```javascript
 {
@@ -84,7 +86,7 @@
 }
 ```
 
-#### Output
+##### Output
 
 ```javascript
 {
@@ -94,4 +96,4 @@
 }
 ```
 
-### DELETE /movies/58003f7aab2c8a2708bac205
+#### DELETE /movies/58003f7aab2c8a2708bac205
