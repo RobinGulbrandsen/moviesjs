@@ -1,62 +1,25 @@
+var Movie = require('../models/MovieModel');
+
 module.exports = {
 
-  create: function (movie, successCallback) {
-
-    MongoClient.connect(this._url, function(err, db) {
-      var collection = db.collection('movies');
-  
-      collection.insert(movie, function(err, result) {
-        if (err) {
-          console.log(err);
-          db.close();
-        }
-
-        successCallback(result);
-        db.close();
-      });
-
-    });
+  create: function (movie) {
+    return new Movie(movie).save();
   },
 
-  read: function (id, successCallback) {
-    MongoClient.connect(this._url, function(err, db) {
-      var collection = db.collection('movies');
-
-      collection.find({_id: id}).toArray(function(err, movies) {
-        if (err) {
-          console.log(err);
-          db.close();
-        }
-
-        successCallback(movies);
-        db.close();
-      });
-
-    });
+  read: function (id) {
+    return Movie.find({_id: id}).exec();
   },
 
-  readAll: function (successCallback) {
-    MongoClient.connect(this._url, function(err, db) {
-      var collection = db.collection('movies');
-
-      collection.find({}).toArray(function(err, movies) {
-        if (err) {
-          console.log(err);
-          db.close();
-        }
-
-        successCallback(movies);
-        db.close();
-      });
-
-    });
+  readAll: function () {
+    return Movie.find({}).exec();
   },
 
-  update: function (id, movie) {
-
+  update: function (movie) {
+    return Movie.update({_id: movie.id}, movie).exec();
   },
 
   destroy: function (id) {
-
+    return Movie.find({_id: id}).remove().exec();
   }
-}
+
+};

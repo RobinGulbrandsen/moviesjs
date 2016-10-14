@@ -10,10 +10,12 @@ module.exports = {
       return;
     }
 
-    MovieRepository.create(movie, function(movie) {
-      console.log('create', movie);
-      res.status(200).send(movie.ops[0]);
-    })
+    MovieRepository.create(movie).then(function(movie) {
+      res.status(200).send(movie);
+    }).catch(function(error) {
+      console.log(error);
+      res.status(500).send('You broke it!');
+    });
   },
 
   read: function (req, res) {
@@ -21,26 +23,45 @@ module.exports = {
       res.status(400).send('Url Param for Id must be defined');
     }
 
-    MovieRepository.read(req.params.id, function(movie) {
-      res.status(200).send();
+    MovieRepository.read(req.params.id).then(function(movie) {
+      res.status(200).send(movie);
+    }).catch(function(error) {
+      console.log(error);
+      res.status(500).send('You broke it!');
     });
   },
 
   readAll: function (req, res) {
-    MovieRepository.readAll(function(movies) {
-      res.status(200).send(movies);
+    MovieRepository.readAll().then(function(data) {
+      res.status(200).send(data);
+    }).catch(function(error) {
+      console.log(error);
+      res.status(500).send('You broke it!');
     });
   },
 
   update: function (req, res) {
-    console.log('update');
+    MovieRepository.read(req.param.id).then(function(movie) {
+      if (!movie) {
+        res.status(404).send('cant update an non exsistant object');
+        return;
+      }
 
-    res.status(200).send();
+      MovieRepository.update(req.body).then(function(updated) {
+        res.status(200).send(updated);
+      });
+    }).catch(function(error) {
+      console.log(error);
+      res.status(500).send('You broke it!');
+    });
   },
 
   destroy: function (req, res) {
-    console.log('destroy');
-
-    res.status(200).send();
+    MovieRepository.destroy(req.params.id).then(function(updated) {
+      res.status(200).send();
+    }).catch(function(error) {
+      console.log(error);
+      res.status(500).send('You broke it!');
+    });
   }
-}
+};
